@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fl_widgets/routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
    
@@ -6,6 +7,7 @@ class HomeScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    final menuOption = AppRoutes.menuOptions;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Componentes en Flutter'),
@@ -14,16 +16,16 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView.separated(
         itemBuilder: (context, index) => ListTile(
-          title: const Text('Nombre de ruta'),
-          leading: const Icon( Icons.access_time_filled_outlined ),
+          title: Text( menuOption[index].name ),
+          leading: Icon( menuOption[index].icon, color: Colors.indigo, ),
           onTap: () {
 
-            Navigator.pushNamed(context, 'alert');
+            Navigator.pushNamed(context, menuOption[index].route );
 
           },
         ), 
         separatorBuilder: (_, __) => const Divider(), 
-        itemCount: 10
+        itemCount: menuOption.length
       )
     );
   }
